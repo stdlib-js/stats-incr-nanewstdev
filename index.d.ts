@@ -1,4 +1,4 @@
-/**
+/*
 * @license Apache-2.0
 *
 * Copyright (c) 2026 The Stdlib Authors.
@@ -16,16 +16,26 @@
 * limitations under the License.
 */
 
-'use strict';
+// TypeScript Version: 4.1
+
+/// <reference types="https://cdn.jsdelivr.net/gh/stdlib-js/types@esm/index.d.ts"/>
 
 /**
-* Compute an exponentially weighted standard deviation incrementally, ignoring `NaN` values.
+* If provided a value, the accumulator function returns an updated standard deviation. If not provided a value, the accumulator function returns the current standard deviation.
 *
-* @module @stdlib/stats-incr-nanewstdev
+* @param x - value
+* @returns standard deviation or null
+*/
+type accumulator = ( x?: number ) => number | null;
+
+/**
+* Returns an accumulator function which incrementally computes an exponentially weighted standard deviation, ignoring `NaN` values.
+*
+* @param alpha - smoothing factor
+* @throws must be on the interval `[0,1]`
+* @returns accumulator function
 *
 * @example
-* var incrnanewstdev = require( '@stdlib/stats-incr-nanewstdev' );
-*
 * var accumulator = incrnanewstdev( 0.5 );
 *
 * var s = accumulator();
@@ -43,12 +53,9 @@
 * s = accumulator();
 * // returns 3.5
 */
-
-// MODULES //
-
-var main = require( './main.js' );
+declare function incrnanewstdev( alpha: number ): accumulator;
 
 
 // EXPORTS //
 
-module.exports = main;
+export = incrnanewstdev;
